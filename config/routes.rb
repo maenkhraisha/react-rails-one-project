@@ -1,6 +1,14 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  get 'root/index'  
+ 
+  root 'root#index'
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  namespace :api do
+    namespace :v1 do
+      resources :messages, only: [:index]
+    end
+  end
+
+  get '*path', to: 'root#index', via: :all
+  
 end
